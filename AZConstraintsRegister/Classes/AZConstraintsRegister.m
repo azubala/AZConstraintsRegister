@@ -1,12 +1,12 @@
 //  
-//  Copyright (c) 2014 Taptera Inc. All rights reserved.
+//  Copyright (c) 2014 Aleksander Zubala. All rights reserved.
 //  
 
 
-#import "ConstraintsRegister.h"
+#import "AZConstraintsRegister.h"
 
 
-@interface ConstraintsRegister ()
+@interface AZConstraintsRegister ()
 @property(nonatomic, weak) UIView *containerView;
 @property(nonatomic, strong) NSMutableDictionary *subviewsForAutoLayoutMutable;
 @property(nonatomic, strong) NSMutableDictionary *layoutMetricsMutable;
@@ -14,15 +14,15 @@
 @end
 
 
-@implementation ConstraintsRegister
+@implementation AZConstraintsRegister
 
 #pragma mark - Constants
 
-NSString *const ConstraintRegisterTopKey = @"top";
-NSString *const ConstraintRegisterLeftKey = @"left";
-NSString *const ConstraintRegisterBottomKey = @"bottom";
-NSString *const ConstraintRegisterRightKey = @"right";
-NSString *const ConstraintRegisterSpacingKey = @"spacing";
+NSString *const AZConstraintRegisterTopKey = @"top";
+NSString *const AZConstraintRegisterLeftKey = @"left";
+NSString *const AZConstraintRegisterBottomKey = @"bottom";
+NSString *const AZConstraintRegisterRightKey = @"right";
+NSString *const AZConstraintRegisterSpacingKey = @"spacing";
 
 #pragma mark - Object life cycle
 
@@ -39,7 +39,7 @@ NSString *const ConstraintRegisterSpacingKey = @"spacing";
 - (void)initializeDefaultLayoutMetrics {
     self.layoutMetricsMutable = [NSMutableDictionary new];
     [self registerContentInsetsMetric:self.contentInsets];
-    [self registerMetric:@(self.interItemSpacing) forKey:ConstraintRegisterSpacingKey];
+    [self registerMetric:@(self.interItemSpacing) forKey:AZConstraintRegisterSpacingKey];
 }
 
 #pragma mark - Dynamic accessors
@@ -66,7 +66,7 @@ NSString *const ConstraintRegisterSpacingKey = @"spacing";
 - (void)setInterItemSpacing:(CGFloat)interItemSpacing {
     if (_interItemSpacing != interItemSpacing) {
         _interItemSpacing = interItemSpacing;
-        [self registerMetric:@(interItemSpacing) forKey:ConstraintRegisterSpacingKey];
+        [self registerMetric:@(interItemSpacing) forKey:AZConstraintRegisterSpacingKey];
     }
 }
 
@@ -123,9 +123,9 @@ NSString *const ConstraintRegisterSpacingKey = @"spacing";
 #pragma mark - Private methods
 
 - (void)registerContentInsetsMetric:(UIEdgeInsets)contentInsets {
-    [self registerMetric:@(contentInsets.top) forKey:ConstraintRegisterTopKey];
-    [self registerMetric:@(contentInsets.left) forKey:ConstraintRegisterLeftKey];
-    [self registerMetric:@(contentInsets.bottom) forKey:ConstraintRegisterBottomKey];
-    [self registerMetric:@(contentInsets.right) forKey:ConstraintRegisterRightKey];
+    [self registerMetric:@(contentInsets.top) forKey:AZConstraintRegisterTopKey];
+    [self registerMetric:@(contentInsets.left) forKey:AZConstraintRegisterLeftKey];
+    [self registerMetric:@(contentInsets.bottom) forKey:AZConstraintRegisterBottomKey];
+    [self registerMetric:@(contentInsets.right) forKey:AZConstraintRegisterRightKey];
 }
 @end

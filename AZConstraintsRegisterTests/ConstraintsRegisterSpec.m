@@ -1,22 +1,22 @@
 #import "Specta.h"
-#import "ConstraintsRegister.h"
-#import "NSLayoutConstraint+TAPComparing.h"
+#import "AZConstraintsRegister.h"
+#import "NSLayoutConstraint+AZComparing.h"
 
 SpecBegin(Thing)
 
-        describe(@"ConstraintsRegister", ^{
+        describe(@"AZConstraintsRegister", ^{
         
-        __block ConstraintsRegister *constraintsRegister;
+        __block AZConstraintsRegister *constraintsRegister;
 
         beforeEach(^{
-            constraintsRegister = [ConstraintsRegister new];
+            constraintsRegister = [AZConstraintsRegister new];
         });
 
         it(@"should have default edge insets set", ^{
-            expect(constraintsRegister.layoutMetrics[ConstraintRegisterTopKey]).to.equal(0);
-            expect(constraintsRegister.layoutMetrics[ConstraintRegisterLeftKey]).to.equal(0);
-            expect(constraintsRegister.layoutMetrics[ConstraintRegisterBottomKey]).to.equal(0);
-            expect(constraintsRegister.layoutMetrics[ConstraintRegisterRightKey]).to.equal(0);
+            expect(constraintsRegister.layoutMetrics[AZConstraintRegisterTopKey]).to.equal(0);
+            expect(constraintsRegister.layoutMetrics[AZConstraintRegisterLeftKey]).to.equal(0);
+            expect(constraintsRegister.layoutMetrics[AZConstraintRegisterBottomKey]).to.equal(0);
+            expect(constraintsRegister.layoutMetrics[AZConstraintRegisterRightKey]).to.equal(0);
         });
 
         describe(@"register view for auto layout", ^{
@@ -64,7 +64,7 @@ SpecBegin(Thing)
             it(@"should remove all constraints from container view", ^{
                 for (NSLayoutConstraint *registeredConstraint in registeredConstraints) {
                     NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(NSLayoutConstraint *evaluatedObject, NSDictionary *bindings) {
-                        return [registeredConstraint tap_isEqualToConstraint:evaluatedObject];
+                        return [registeredConstraint az_isEqualToConstraint:evaluatedObject];
                     }];
                     expect([testView.constraints filteredArrayUsingPredicate:predicate]).to.haveCountOf(0);
                 }
@@ -73,7 +73,7 @@ SpecBegin(Thing)
                 expect([constraintsRegister registeredConstraints]).to.haveCountOf(0);
             });
             it(@"should clear registered metrics", ^{
-                ConstraintsRegister *cleanRegister = [ConstraintsRegister new];
+                AZConstraintsRegister *cleanRegister = [AZConstraintsRegister new];
                 expect(constraintsRegister.layoutMetrics).to.equal(cleanRegister.layoutMetrics);
             });
         });
@@ -148,10 +148,10 @@ SpecBegin(Thing)
                 });
 
                 it(@"should be present in the metrics dict with value based on property", ^{
-                    expect(constraintsRegister.layoutMetrics[ConstraintRegisterTopKey]).to.equal(testEdgeInsets.top);
-                    expect(constraintsRegister.layoutMetrics[ConstraintRegisterLeftKey]).to.equal(testEdgeInsets.left);
-                    expect(constraintsRegister.layoutMetrics[ConstraintRegisterBottomKey]).to.equal(testEdgeInsets.bottom);
-                    expect(constraintsRegister.layoutMetrics[ConstraintRegisterRightKey]).to.equal(testEdgeInsets.right);
+                    expect(constraintsRegister.layoutMetrics[AZConstraintRegisterTopKey]).to.equal(testEdgeInsets.top);
+                    expect(constraintsRegister.layoutMetrics[AZConstraintRegisterLeftKey]).to.equal(testEdgeInsets.left);
+                    expect(constraintsRegister.layoutMetrics[AZConstraintRegisterBottomKey]).to.equal(testEdgeInsets.bottom);
+                    expect(constraintsRegister.layoutMetrics[AZConstraintRegisterRightKey]).to.equal(testEdgeInsets.right);
                 });
             });
             context(@"inter item spacing", ^{
@@ -162,7 +162,7 @@ SpecBegin(Thing)
                 });
                 
                 it(@"should be present in the metrics dict with value based on property", ^{
-                    expect(constraintsRegister.layoutMetrics[ConstraintRegisterSpacingKey]).to.equal(testInterItemSpacing);
+                    expect(constraintsRegister.layoutMetrics[AZConstraintRegisterSpacingKey]).to.equal(testInterItemSpacing);
                 });
             });
         });
@@ -205,7 +205,7 @@ SpecBegin(Thing)
                     NSEnumerator *enumerator = [constraintsRegister.registeredConstraints objectEnumerator];
                     for (NSLayoutConstraint *constraint in constraints) {
                         NSLayoutConstraint *registeredConstraint = [enumerator nextObject];
-                        expect([constraint tap_isEqualToConstraint:registeredConstraint]).to.beTruthy();
+                        expect([constraint az_isEqualToConstraint:registeredConstraint]).to.beTruthy();
                     }
                 });
             });

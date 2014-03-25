@@ -1,13 +1,13 @@
 //  
-//  Copyright (c) 2014 Taptera Inc. All rights reserved.
+//  Copyright (c) 2014 Aleksander Zubala. All rights reserved.
 //  
 
 
-#import "NSLayoutConstraint+TAPComparing.h"
+#import "NSLayoutConstraint+AZComparing.h"
 
 
-@implementation NSLayoutConstraint (TAPComparing)
-- (BOOL)tap_isEqualToConstraint:(NSLayoutConstraint *)constraint {
+@implementation NSLayoutConstraint (AZComparing)
+- (BOOL)az_isEqualToConstraint:(NSLayoutConstraint *)constraint {
     return [constraint.firstItem isEqual:self.firstItem] &&
         constraint.firstAttribute == self.firstAttribute &&
         constraint.relation == self.relation &&

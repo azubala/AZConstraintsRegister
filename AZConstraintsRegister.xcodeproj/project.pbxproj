@@ -9,15 +9,15 @@
 /* Begin PBXBuildFile section */
 		510430260636BAB89B5963AD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 510431B4AACAA180FA2DBC6C /* Images.xcassets */; };
 		51043142E53BAB51D3310BFB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51043514D40DEB869C0A056C /* UIKit.framework */; };
-		510433D33F7F6062641BBB9F /* ConstraintsRegister.m in Sources */ = {isa = PBXBuildFile; fileRef = 51043D4918571E6902B9C926 /* ConstraintsRegister.m */; };
+		510433D33F7F6062641BBB9F /* AZConstraintsRegister.m in Sources */ = {isa = PBXBuildFile; fileRef = 51043D4918571E6902B9C926 /* AZConstraintsRegister.m */; };
 		5104357DF24D358FA3374BD6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 51043A921BD7DDDC038398D3 /* InfoPlist.strings */; };
 		51043606AD961EFAAF4C4E56 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 51043418CF47D78B944DE1D4 /* AppDelegate.m */; };
 		5104372C1C1F7F54D04D1310 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 510433456E5D2DAC1AACE1ED /* CoreGraphics.framework */; };
 		51043D0644239FFA9DE5CD44 /* ConstraintsRegisterSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 510434C39A0CE29BFC00D1B1 /* ConstraintsRegisterSpec.m */; };
 		51043D532A88BA3F51854235 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51043616F7F7EA10EFAB31AD /* Foundation.framework */; };
-		51043DBF8845E208515DA5E2 /* ConstraintsRegister.m in Sources */ = {isa = PBXBuildFile; fileRef = 51043D4918571E6902B9C926 /* ConstraintsRegister.m */; };
+		51043DBF8845E208515DA5E2 /* AZConstraintsRegister.m in Sources */ = {isa = PBXBuildFile; fileRef = 51043D4918571E6902B9C926 /* AZConstraintsRegister.m */; };
 		51043E04C3A61023CD5CE3BA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5104365126CF6D0C7CBA2EB2 /* main.m */; };
-		51043ED4E5109BB017C74B04 /* NSLayoutConstraint+TAPComparing.m in Sources */ = {isa = PBXBuildFile; fileRef = 51043EB9648A43FBDA8AB141 /* NSLayoutConstraint+TAPComparing.m */; };
+		51043ED4E5109BB017C74B04 /* NSLayoutConstraint+AZComparing.m in Sources */ = {isa = PBXBuildFile; fileRef = 51043EB9648A43FBDA8AB141 /* NSLayoutConstraint+AZComparing.m */; };
 		9438522618E1D4D500890B57 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51043584648997729AE9CDBA /* XCTest.framework */; };
 		9438522718E1D4D500890B57 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51043616F7F7EA10EFAB31AD /* Foundation.framework */; };
 		9438522818E1D4D500890B57 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51043514D40DEB869C0A056C /* UIKit.framework */; };
@@ -36,7 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		510430C32B39846E81CB2A7C /* NSLayoutConstraint+TAPComparing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSLayoutConstraint+TAPComparing.h"; sourceTree = "<group>"; };
+		510430C32B39846E81CB2A7C /* NSLayoutConstraint+AZComparing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSLayoutConstraint+AZComparing.h"; sourceTree = "<group>"; };
 		510431B4AACAA180FA2DBC6C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		510433456E5D2DAC1AACE1ED /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		51043418CF47D78B944DE1D4 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -47,11 +47,11 @@
 		5104365126CF6D0C7CBA2EB2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		51043861E10C76E97A0C58C2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		5104393A74588A229D32F733 /* AZConstraintsRegister-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = "AZConstraintsRegister-Info.plist"; sourceTree = "<group>"; };
-		5104399C6C5F5A08CD624D2D /* ConstraintsRegister.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConstraintsRegister.h; sourceTree = "<group>"; };
+		5104399C6C5F5A08CD624D2D /* AZConstraintsRegister.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AZConstraintsRegister.h; sourceTree = "<group>"; };
 		51043B9A37F43D06AC804789 /* AZConstraintsRegister-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AZConstraintsRegister-Prefix.pch"; sourceTree = "<group>"; };
-		51043D4918571E6902B9C926 /* ConstraintsRegister.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConstraintsRegister.m; sourceTree = "<group>"; };
+		51043D4918571E6902B9C926 /* AZConstraintsRegister.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AZConstraintsRegister.m; sourceTree = "<group>"; };
 		51043DB3EEEE7B2AE9874E53 /* AZConstraintsRegister.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AZConstraintsRegister.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		51043EB9648A43FBDA8AB141 /* NSLayoutConstraint+TAPComparing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSLayoutConstraint+TAPComparing.m"; sourceTree = "<group>"; };
+		51043EB9648A43FBDA8AB141 /* NSLayoutConstraint+AZComparing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSLayoutConstraint+AZComparing.m"; sourceTree = "<group>"; };
 		51043F5E0A103A242DD3EC7A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5EF4DEB3DE5E4B48B5ACC091 /* libPods-AZConstraintsRegisterTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AZConstraintsRegisterTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9438522518E1D4D500890B57 /* AZConstraintsRegisterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AZConstraintsRegisterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -89,8 +89,8 @@
 		510432563F9BCF12B1FE02B7 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				5104399C6C5F5A08CD624D2D /* ConstraintsRegister.h */,
-				51043D4918571E6902B9C926 /* ConstraintsRegister.m */,
+				5104399C6C5F5A08CD624D2D /* AZConstraintsRegister.h */,
+				51043D4918571E6902B9C926 /* AZConstraintsRegister.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -155,8 +155,8 @@
 			children = (
 				9438522A18E1D4D500890B57 /* Supporting Files */,
 				510434C39A0CE29BFC00D1B1 /* ConstraintsRegisterSpec.m */,
-				510430C32B39846E81CB2A7C /* NSLayoutConstraint+TAPComparing.h */,
-				51043EB9648A43FBDA8AB141 /* NSLayoutConstraint+TAPComparing.m */,
+				510430C32B39846E81CB2A7C /* NSLayoutConstraint+AZComparing.h */,
+				51043EB9648A43FBDA8AB141 /* NSLayoutConstraint+AZComparing.m */,
 			);
 			path = AZConstraintsRegisterTests;
 			sourceTree = "<group>";
@@ -302,7 +302,7 @@
 			files = (
 				51043E04C3A61023CD5CE3BA /* main.m in Sources */,
 				51043606AD961EFAAF4C4E56 /* AppDelegate.m in Sources */,
-				51043DBF8845E208515DA5E2 /* ConstraintsRegister.m in Sources */,
+				51043DBF8845E208515DA5E2 /* AZConstraintsRegister.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,9 +310,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				510433D33F7F6062641BBB9F /* ConstraintsRegister.m in Sources */,
+				510433D33F7F6062641BBB9F /* AZConstraintsRegister.m in Sources */,
 				51043D0644239FFA9DE5CD44 /* ConstraintsRegisterSpec.m in Sources */,
-				51043ED4E5109BB017C74B04 /* NSLayoutConstraint+TAPComparing.m in Sources */,
+				51043ED4E5109BB017C74B04 /* NSLayoutConstraint+AZComparing.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

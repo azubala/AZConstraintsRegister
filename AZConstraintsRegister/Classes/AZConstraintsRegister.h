@@ -1,11 +1,11 @@
 //  
-//  Copyright (c) 2014 Taptera Inc. All rights reserved.
+//  Copyright (c) 2014 Aleksander Zubala. All rights reserved.
 //  
 
 
 #import <Foundation/Foundation.h>
 
-@interface ConstraintsRegister : NSObject
+@interface AZConstraintsRegister : NSObject
 @property(nonatomic, readonly, weak) UIView *containerView;
 @property(nonatomic, readonly) NSDictionary *subviewsForAutoLayout;
 @property(nonatomic, readonly) NSDictionary *layoutMetrics;
@@ -32,8 +32,8 @@
 @end
 
 // Layout predefined keys, which can be used in VFL in constraints
-extern NSString *const ConstraintRegisterTopKey; //based on contentInsets.top,
-extern NSString *const ConstraintRegisterLeftKey; //based on contentInsets.left,
-extern NSString *const ConstraintRegisterBottomKey; //based on contentInsets.bottom
-extern NSString *const ConstraintRegisterRightKey; //based on contentInsets.right
-extern NSString *const ConstraintRegisterSpacingKey; //based on interItemSpacing
+extern NSString *const AZConstraintRegisterTopKey; //based on contentInsets.top,
+extern NSString *const AZConstraintRegisterLeftKey; //based on contentInsets.left,
+extern NSString *const AZConstraintRegisterBottomKey; //based on contentInsets.bottom
+extern NSString *const AZConstraintRegisterRightKey; //based on contentInsets.right
+extern NSString *const AZConstraintRegisterSpacingKey; //based on interItemSpacing
