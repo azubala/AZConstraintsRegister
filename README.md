@@ -1,7 +1,6 @@
 # AZConstraintsRegister
 
-[![Version](http://cocoapod-badges.herokuapp.com/v/AZConstraintsRegister/badge.png)](http://cocoadocs.org/docsets/AZConstraintsRegister)
-[![Platform](http://cocoapod-badges.herokuapp.com/p/AZConstraintsRegister/badge.png)](http://cocoadocs.org/docsets/AZConstraintsRegister)
+Lightweight tool to manage Auto Layout constraints using Visual Format Language.
 
 ## Usage
 
