@@ -51,7 +51,7 @@ You can either do this once in the initliser for static constraints or, if you n
 }
 ```
 
-In this case remember to call somewhere 'setNeedsUpdateConstraints' otherwise `updateConstraints` won't be fired.
+In this case remember to call somewhere `setNeedsUpdateConstraints` otherwise `updateConstraints` won't be fired.
 
 And that's pretty much it! It's worth mentioning that `AZConstraintsRegister` tracks every constraints which were registered so it does not conflict with existing ones or added externally.
 
