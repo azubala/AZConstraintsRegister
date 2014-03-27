@@ -23,26 +23,35 @@ In order to use the register, you need to do two things. First you need to regis
 		self.subview = [UIView new];
 		[self addSubview:self.subview];
 
-		self.constraintsRegister = [AZConstraintsRegister registerWithContainerView:self];		
-		[self.constraintsRegister registerSubview:self.subview forLayoutKey:@"subview"];
+		self.constraintsRegister = [AZConstraintsRegister registerWithContainerView:self];				
 	}
 	return self;
 }
 ```
 
-Second thing that needs to be done is to register constraints for subviews (best place to do this is in `updateConstraints` method of UIView):
+Now you can enjoy the register simplicity, just add VFL constraints to the view between calls of `beginUpdates` and `endUpdates`:
+
+```objective-c
+[self.constraintsRegister beginUpdates]; // clears previous state
+[self.constraintsRegister registerConstraintWithFormat:@"|-[subview]-|"];
+[self.constraintsRegister registerConstraintWithFormat:@"V:|-[subview]-|"];
+[self.constraintsRegister endUpdates]; //submits created constraints to the view
+```
+
+You can either do this once in the initliser for static constraints or, if you need more dynamic behavior, in the `updateConstraints`:
 
 ```objective-c
 - (void)updateConstraints {
-	[self.constraintsRegister beginUpdates]; // clears previous state
-
+	[self.constraintsRegister beginUpdates]; // clears previous state	
 	[self.constraintsRegister registerConstraintWithFormat:@"|-[subview]-|"];
 	[self.constraintsRegister registerConstraintWithFormat:@"V:|-[subview]-|"];
-
 	[self.constraintsRegister endUpdates]; //submits created constraints to the view
 	[super updateConstraints];
 }
 ```
+
+In this case remember to call somewhere 'setNeedsUpdateConstraints' otherwise `updateConstraints` won't be fired.
+
 And that's pretty much it! It's worth mentioning that `AZConstraintsRegister` tracks every constraints which were registered so it does not conflict with existing ones or added externally.
 
 The cool thing about the register is that makes code cleaner, you don't have to use this long `NSLayoutConstraint` methods. 
