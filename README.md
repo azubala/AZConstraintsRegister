@@ -44,7 +44,7 @@ Second thing that needs to be done is to register constraints for subviews (best
 	[super updateConstraints];
 }
 ```
-And that's pretty much it!
+And that's pretty much it! It's worth mentioning that `AZConstraintsRegister` tracks every constraints which were registered so it does not conflict with existing ones or added externally.
 
 The cool thing about the register is that makes code cleaner, you don't have to use this long `NSLayoutConstraint` methods. 
 
@@ -66,7 +66,7 @@ NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"|-(mySp
 
 ```
 
-That's pretty cool but makes code long and not nice to read. The AZConstraintsRegister comes to help, whenever you would like to register a metric for VFL, you can do it like so:
+That's pretty cool but makes code long and not nice to read. The `AZConstraintsRegister` comes to the rescue! Whenever you would like to register a metric for VFL, you can do it like so:
 
 ```objective-c
 [self.constraintsRegister registerMetric:@(20.0f) forKey:@"mySpacing"];
