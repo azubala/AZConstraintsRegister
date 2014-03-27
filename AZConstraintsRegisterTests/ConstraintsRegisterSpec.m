@@ -78,44 +78,39 @@ SpecBegin(Thing)
             });
         });
 
-        describe(@"registering view's subviews", ^{
-
+        describe(@"registering view", ^{
             __block UIView *testView;
             __block UIView *testSubview;
             __block NSString *subviewLayoutKey;
-
             beforeEach(^{
                 testView = [UIView new];
                 [constraintsRegister registerContainerView:testView];
-
                 testSubview = [UIView new];
                 subviewLayoutKey = @"testSubview";
-                [testView addSubview:testSubview];
-
-                [constraintsRegister registerSubviewForAutoLayout:testSubview forLayoutKey:subviewLayoutKey]; //action
             });
-
-            it(@"should add a new key to subview for auto layout dictionary", ^{
-                expect([[constraintsRegister subviewsForAutoLayout] allKeys]).to.contain(subviewLayoutKey);
-            });
-
-            it(@"should add a view to subview for auto layout dictionary ", ^{
-                expect([[constraintsRegister subviewsForAutoLayout] allValues]).to.contain(testSubview);
-            });
-
-            it(@"should disable translate autoresizing masks to constraints", ^{
-                expect(testSubview.translatesAutoresizingMaskIntoConstraints).to.beFalsy();
-            });
-
-            context(@"which is not a subview of the view", ^{
+            context(@"which is subview of container view", ^{
                 beforeEach(^{
-                    [testSubview removeFromSuperview];
+                    [testView addSubview:testSubview];
+                    [constraintsRegister registerSubviewForAutoLayout:testSubview forLayoutKey:subviewLayoutKey]; //action
+                });
+                it(@"should add a new key to subview for auto layout dictionary", ^{
+                    expect([[constraintsRegister subviewsForAutoLayout] allKeys]).to.contain(subviewLayoutKey);
+                });
+                it(@"should add a view to subview for auto layout dictionary ", ^{
+                    expect([[constraintsRegister subviewsForAutoLayout] allValues]).to.contain(testSubview);
                 });
 
+                it(@"should disable translate autoresizing masks to constraints", ^{
+                    expect(testSubview.translatesAutoresizingMaskIntoConstraints).to.beFalsy();
+                });
+            });
+            context(@"which is not a subview of container view", ^{
+                beforeEach(^{
+                    [constraintsRegister registerSubviewForAutoLayout:testSubview forLayoutKey:subviewLayoutKey]; //action
+                });
                 it(@"should NOT add a new key to subview for auto layout dictionary", ^{
                     expect([[constraintsRegister subviewsForAutoLayout] allKeys]).notTo.contain(subviewLayoutKey);
                 });
-
                 it(@"should NOT add a view to subview for auto layout dictionary ", ^{
                     expect([[constraintsRegister subviewsForAutoLayout] allValues]).notTo.contain(testSubview);
                 });
