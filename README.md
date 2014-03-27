@@ -15,7 +15,7 @@ Let's say you have a view with one subview, something like that:
 @property (nonatomic, strong) AZConstraintsRegister *constraintsRegister;
 @end
 ```
-In order to use the register, you need to do two things. First you need to register container view which subviews will be used for AutoLayout. You can do it in your initialiser:
+In order to use the register, you need to do two things. First you need to register container view and its subviews which will be used for AutoLayout. You can do it in your initialiser:
 
 ```objective-c
 - (id)initWithFrame:(CGRect)rect {
@@ -74,7 +74,7 @@ That's pretty cool but makes code long and not nice to read. The `AZConstraintsR
 
 And then you can refer to `mySpacing` in your VFL.
 
-By default AZConstraintsRegister comes with two default metrics, which are exposed as properties:
+By default `AZConstraintsRegister` comes with two default metrics, which are exposed as properties:
 ```objective-c
 @property(nonatomic) UIEdgeInsets contentInsets;
 @property(nonatomic) CGFloat interItemSpacing;
