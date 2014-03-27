@@ -18,7 +18,7 @@ it simply add the following line to your Podfile:
 
 ## Author
 
-Aleksander Zubala, az@taptera.com
+Aleksander Zubala, alek.zubala@gmail.com
 
 ## License
 
