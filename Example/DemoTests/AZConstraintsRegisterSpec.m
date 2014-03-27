@@ -2,10 +2,8 @@
 #import "AZConstraintsRegister.h"
 #import "NSLayoutConstraint+AZComparing.h"
 
-SpecBegin(Thing)
+SpecBegin(AZConstraintsRegister)
 
-        describe(@"AZConstraintsRegister", ^{
-        
         __block AZConstraintsRegister *constraintsRegister;
 
         beforeEach(^{
@@ -19,19 +17,26 @@ SpecBegin(Thing)
             expect(constraintsRegister.layoutMetrics[AZConstraintRegisterRightKey]).to.equal(0);
         });
 
-        describe(@"register view for auto layout", ^{
-            
+        describe(@"creating with container view", ^{
             __block UIView *testView;
+            beforeEach(^{
+                testView = [UIView new];
+                constraintsRegister = [AZConstraintsRegister registerWithContainerView:testView];
+            });
+            it(@"should update view property", ^{
+                expect(constraintsRegister.containerView).to.equal(testView);
+            });
+        });
 
+        describe(@"register view for auto layout", ^{
+            __block UIView *testView;
             beforeEach(^{
                 testView = [UIView new];
                 [constraintsRegister registerContainerView:testView];
             });
-
             it(@"should update view property", ^{
                 expect(constraintsRegister.containerView).to.equal(testView);
             });
-
         });
 
         describe(@"unregister view", ^{
@@ -44,7 +49,7 @@ SpecBegin(Thing)
                 [testView addSubview:testSubview];
 
                 [constraintsRegister registerContainerView:testView];
-                [constraintsRegister registerSubviewForAutoLayout:testSubview forLayoutKey:@"subview"];
+                [constraintsRegister registerSubview:testSubview forLayoutKey:@"subview"];
                 [constraintsRegister beginUpdates];
                 [constraintsRegister registerConstraintWithFormat:@"|-left-[subview]-right-|"];
                 [constraintsRegister registerConstraintWithFormat:@"V:|-top-[subview]-bottom-|"];
@@ -91,7 +96,7 @@ SpecBegin(Thing)
             context(@"which is subview of container view", ^{
                 beforeEach(^{
                     [testView addSubview:testSubview];
-                    [constraintsRegister registerSubviewForAutoLayout:testSubview forLayoutKey:subviewLayoutKey]; //action
+                    [constraintsRegister registerSubview:testSubview forLayoutKey:subviewLayoutKey]; //action
                 });
                 it(@"should add a new key to subview for auto layout dictionary", ^{
                     expect([[constraintsRegister subviewsForAutoLayout] allKeys]).to.contain(subviewLayoutKey);
@@ -106,7 +111,7 @@ SpecBegin(Thing)
             });
             context(@"which is not a subview of container view", ^{
                 beforeEach(^{
-                    [constraintsRegister registerSubviewForAutoLayout:testSubview forLayoutKey:subviewLayoutKey]; //action
+                    [constraintsRegister registerSubview:testSubview forLayoutKey:subviewLayoutKey]; //action
                 });
                 it(@"should NOT add a new key to subview for auto layout dictionary", ^{
                     expect([[constraintsRegister subviewsForAutoLayout] allKeys]).notTo.contain(subviewLayoutKey);
@@ -118,7 +123,7 @@ SpecBegin(Thing)
         });
 
         describe(@"registering metric", ^{
-            
+
             __block NSString *metricKey;
             __block NSNumber *metricValue;
 
@@ -131,7 +136,7 @@ SpecBegin(Thing)
 
             it(@"should update metrics dictionary", ^{
                 expect(constraintsRegister.layoutMetrics[metricKey]).to.equal(metricValue);
-            }); 
+            });
         });
 
         describe(@"default metric", ^{
@@ -155,7 +160,7 @@ SpecBegin(Thing)
                     testInterItemSpacing = 10.0f;
                     constraintsRegister.interItemSpacing = testInterItemSpacing;
                 });
-                
+
                 it(@"should be present in the metrics dict with value based on property", ^{
                     expect(constraintsRegister.layoutMetrics[AZConstraintRegisterSpacingKey]).to.equal(testInterItemSpacing);
                 });
@@ -189,7 +194,7 @@ SpecBegin(Thing)
                 testSubview = [UIView new];
                 [testView addSubview:testSubview];
                 [constraintsRegister registerContainerView:testView];
-                [constraintsRegister registerSubviewForAutoLayout:testSubview forLayoutKey:subviewKey];
+                [constraintsRegister registerSubview:testSubview forLayoutKey:subviewKey];
                 constraintsRegister.contentInsets = UIEdgeInsetsMake(10, 10, 10, 10);
             });
 
@@ -232,7 +237,7 @@ SpecBegin(Thing)
                 [testView addSubview:subview];
                 [constraintsRegister registerContainerView:testView];
                 constraintsRegister.contentInsets = UIEdgeInsetsMake(10, 10, 10, 10);
-                [constraintsRegister registerSubviewForAutoLayout:subview forLayoutKey:subviewKey];
+                [constraintsRegister registerSubview:subview forLayoutKey:subviewKey];
 
                 [constraintsRegister beginUpdates];
                 [constraintsRegister registerConstraintWithFormat:@"V:|-top-[subview]-bottom-|"];
@@ -264,7 +269,7 @@ SpecBegin(Thing)
                 [testView addSubview:subview];
                 [constraintsRegister registerContainerView:testView];
                 constraintsRegister.contentInsets = UIEdgeInsetsMake(10, 10, 10, 10);
-                [constraintsRegister registerSubviewForAutoLayout:subview forLayoutKey:subviewKey];
+                [constraintsRegister registerSubview:subview forLayoutKey:subviewKey];
                 [constraintsRegister registerConstraintWithFormat:@"V:|-top-[subview]-bottom-|"];
 
                 [constraintsRegister endUpdates]; //action
@@ -276,5 +281,4 @@ SpecBegin(Thing)
                 }
             });
         });
-    });
-SpecEnd
+        SpecEnd

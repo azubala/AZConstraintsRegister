@@ -24,6 +24,14 @@ NSString *const AZConstraintRegisterBottomKey = @"bottom";
 NSString *const AZConstraintRegisterRightKey = @"right";
 NSString *const AZConstraintRegisterSpacingKey = @"spacing";
 
+#pragma mark - Class methods
+
++ (instancetype)registerWithContainerView:(UIView *)view {
+    AZConstraintsRegister *constraintsRegister = [AZConstraintsRegister new];
+    [constraintsRegister registerContainerView:view];
+    return constraintsRegister;
+}
+
 #pragma mark - Object life cycle
 
 - (id)init {
@@ -85,7 +93,7 @@ NSString *const AZConstraintRegisterSpacingKey = @"spacing";
 }
 
 
-- (void)registerSubviewForAutoLayout:(UIView *)view forLayoutKey:(NSString *)layoutKey {
+- (void)registerSubview:(UIView *)view forLayoutKey:(NSString *)layoutKey {
     if ([view isDescendantOfView:self.containerView] && layoutKey) {
         view.translatesAutoresizingMaskIntoConstraints = NO;
         self.subviewsForAutoLayoutMutable[layoutKey] = view;

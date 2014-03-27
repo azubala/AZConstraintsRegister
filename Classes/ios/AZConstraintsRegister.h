@@ -15,10 +15,12 @@
 @property(nonatomic) UIEdgeInsets contentInsets;
 @property(nonatomic) CGFloat interItemSpacing;
 
++ (instancetype)registerWithContainerView:(UIView *)view;
+
 - (void)registerContainerView:(UIView *)view;
 - (void)unregisterContainerView;
 
-- (void)registerSubviewForAutoLayout:(UIView *)view forLayoutKey:(NSString *)layoutKey;
+- (void)registerSubview:(UIView *)view forLayoutKey:(NSString *)layoutKey;
 - (void)registerMetric:(NSNumber *)metricValue forKey:(NSString *)metricKey;
 
 - (void)beginUpdates;

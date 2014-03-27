@@ -11,7 +11,7 @@
 		945B441C18E4451C0078F188 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94A7957018E440C500B62B8D /* Foundation.framework */; };
 		945B441D18E4451C0078F188 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94A7957418E440C500B62B8D /* UIKit.framework */; };
 		945B442318E4451C0078F188 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 945B442118E4451C0078F188 /* InfoPlist.strings */; };
-		945B442F18E445420078F188 /* ConstraintsRegisterSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 945B442C18E445420078F188 /* ConstraintsRegisterSpec.m */; };
+		945B442F18E445420078F188 /* AZConstraintsRegisterSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 945B442C18E445420078F188 /* AZConstraintsRegisterSpec.m */; };
 		945B443018E445420078F188 /* NSLayoutConstraint+AZComparing.m in Sources */ = {isa = PBXBuildFile; fileRef = 945B442E18E445420078F188 /* NSLayoutConstraint+AZComparing.m */; };
 		94A7957118E440C500B62B8D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94A7957018E440C500B62B8D /* Foundation.framework */; };
 		94A7957318E440C500B62B8D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94A7957218E440C500B62B8D /* CoreGraphics.framework */; };
@@ -43,7 +43,7 @@
 		945B442018E4451C0078F188 /* DemoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DemoTests-Info.plist"; sourceTree = "<group>"; };
 		945B442218E4451C0078F188 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		945B442618E4451C0078F188 /* DemoTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DemoTests-Prefix.pch"; sourceTree = "<group>"; };
-		945B442C18E445420078F188 /* ConstraintsRegisterSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConstraintsRegisterSpec.m; sourceTree = "<group>"; };
+		945B442C18E445420078F188 /* AZConstraintsRegisterSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AZConstraintsRegisterSpec.m; sourceTree = "<group>"; };
 		945B442D18E445420078F188 /* NSLayoutConstraint+AZComparing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSLayoutConstraint+AZComparing.h"; sourceTree = "<group>"; };
 		945B442E18E445420078F188 /* NSLayoutConstraint+AZComparing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSLayoutConstraint+AZComparing.m"; sourceTree = "<group>"; };
 		94A7956D18E440C500B62B8D /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -89,7 +89,7 @@
 		945B441E18E4451C0078F188 /* DemoTests */ = {
 			isa = PBXGroup;
 			children = (
-				945B442C18E445420078F188 /* ConstraintsRegisterSpec.m */,
+				945B442C18E445420078F188 /* AZConstraintsRegisterSpec.m */,
 				945B442D18E445420078F188 /* NSLayoutConstraint+AZComparing.h */,
 				945B442E18E445420078F188 /* NSLayoutConstraint+AZComparing.m */,
 				945B441F18E4451C0078F188 /* Supporting Files */,
@@ -325,7 +325,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				945B442F18E445420078F188 /* ConstraintsRegisterSpec.m in Sources */,
+				945B442F18E445420078F188 /* AZConstraintsRegisterSpec.m in Sources */,
 				945B443018E445420078F188 /* NSLayoutConstraint+AZComparing.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
