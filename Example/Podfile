@@ -1,0 +1,9 @@
+target "Demo" do
+	pod "AZConstraintsRegister", :path => "../AZConstraintsRegister.podspec"
+end
+
+target "DemoTests" do
+	pod "AZConstraintsRegister", :path => "../AZConstraintsRegister.podspec"
+  pod 'Specta',      '~> 0.2.1'
+  pod 'Expecta',     '~> 0.2.3'
+end

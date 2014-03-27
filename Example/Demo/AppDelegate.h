@@ -1,8 +1,8 @@
 //
 //  AppDelegate.h
-//  AZConstraintsRegister
+//  Demo
 //
-//  Created by Aleksander Zubala on 25/03/14.
+//  Created by Aleksander Zubala on 27/03/14.
 //  Copyright (c) 2014 Aleksander Zubala. All rights reserved.
 //
 
