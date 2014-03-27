@@ -23,7 +23,8 @@ In order to use the register, you need to do two things. First you need to regis
 		self.subview = [UIView new];
 		[self addSubview:self.subview];
 
-		self.constraintsRegister = [AZConstraintsRegister registerWithContainerView:self];				
+		self.constraintsRegister = [AZConstraintsRegister registerWithContainerView:self];
+		[self.constraintsRegister registerSubview:self.subview forLayoutKey:@"subview"];				
 	}
 	return self;
 }
