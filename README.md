@@ -34,8 +34,19 @@ Now you can enjoy the register simplicity, just add VFL constraints to the view 
 
 ```objective-c
 [self.constraintsRegister beginUpdates]; // clears previous state
-[self.constraintsRegister registerConstraintWithFormat:@"|-[subview]-|"];
-[self.constraintsRegister registerConstraintWithFormat:@"V:|-[subview]-|"];
+[self.constraintsRegister registerFormat:@"|-[subview]-|"];
+[self.constraintsRegister registerFormat:@"V:|-[subview]-|"];
+[self.constraintsRegister endUpdates]; //submits created constraints to the view
+```
+
+For less code you can use bulk format register:
+
+```objective-c
+[self.constraintsRegister beginUpdates]; // clears previous state
+[self.constraintsRegister registerFormats:@[
+    @"|-(left)-[subview]-(right)-|",
+    @"V:|-(top)-[subview]-(bottom)-|"
+]];
 [self.constraintsRegister endUpdates]; //submits created constraints to the view
 ```
 
@@ -44,8 +55,8 @@ You can either do this once in the initliser for static constraints or, if you n
 ```objective-c
 - (void)updateConstraints {
 	[self.constraintsRegister beginUpdates]; // clears previous state	
-	[self.constraintsRegister registerConstraintWithFormat:@"|-[subview]-|"];
-	[self.constraintsRegister registerConstraintWithFormat:@"V:|-[subview]-|"];
+	[self.constraintsRegister registerFormat:@"|-[subview]-|"];
+	[self.constraintsRegister registerFormat:@"V:|-[subview]-|"];
 	[self.constraintsRegister endUpdates]; //submits created constraints to the view
 	[super updateConstraints];
 }
