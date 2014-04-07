@@ -37,8 +37,8 @@
 
 - (void)updateConstraints {
     [self.constraintsRegister beginUpdates];
-    [self.constraintsRegister registerConstraintWithFormat:@"|-(left)-[subview]-(right)-|"];
-    [self.constraintsRegister registerConstraintWithFormat:@"V:|-(top)-[subview]-(bottom)-|"];
+    [self.constraintsRegister registerFormat:@"|-(left)-[subview]-(right)-|"];
+    [self.constraintsRegister registerFormat:@"V:|-(top)-[subview]-(bottom)-|"];
     [self.constraintsRegister endUpdates];
     [super updateConstraints];
 }

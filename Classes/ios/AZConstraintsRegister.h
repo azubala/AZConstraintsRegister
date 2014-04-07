@@ -26,10 +26,11 @@
 - (void)beginUpdates;
 - (void)endUpdates;
 
-- (void)registerConstraintWithFormat:(NSString *)format;
-- (void)registerConstraint:(NSLayoutConstraint *)constraint;
-- (void)registerConstraintWithFormat:(NSString *)format formatOptions:(NSLayoutFormatOptions)formatOptions;
+- (void)registerFormat:(NSString *)constraintsFormat;
+- (void)registerFormats:(NSArray *)constraintsFormats;
+- (void)registerFormat:(NSString *)constraintsFormat formatOptions:(NSLayoutFormatOptions)formatOptions;
 
+- (void)registerConstraint:(NSLayoutConstraint *)constraint;
 
 @end
 

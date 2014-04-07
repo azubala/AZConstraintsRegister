@@ -1,0 +1,20 @@
+PODS:
+  - AZConstraintsRegister (0.1.1)
+  - Expecta (0.2.4)
+  - Specta (0.2.1)
+
+DEPENDENCIES:
+  - AZConstraintsRegister (from `../AZConstraintsRegister.podspec`)
+  - Expecta (~> 0.2.3)
+  - Specta (~> 0.2.1)
+
+EXTERNAL SOURCES:
+  AZConstraintsRegister:
+    :path: ../AZConstraintsRegister.podspec
+
+SPEC CHECKSUMS:
+  AZConstraintsRegister: c0138030783014d5e9fc1c250c8bf5b25d4467cd
+  Expecta: 5c147dedfea5fbcf773995f7e65020abcc936ce5
+  Specta: 2d06220591110c6d9757d8be8ecf8e63aa40dc2a
+
+COCOAPODS: 0.29.0

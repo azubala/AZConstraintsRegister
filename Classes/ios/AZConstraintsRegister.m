@@ -115,16 +115,25 @@ NSString *const AZConstraintRegisterSpacingKey = @"spacing";
     [self.containerView addConstraints:self.registeredConstraints];
 }
 
-- (void)registerConstraintWithFormat:(NSString *)format {
-    [self registerConstraintWithFormat:format formatOptions:0];
+- (void)registerFormat:(NSString *)constraintsFormat {
+    [self registerFormat:constraintsFormat formatOptions:0];
+}
+
+- (void)registerFormats:(NSArray *)constraintsFormats {
+    for (NSString *constraintsFormat in constraintsFormats) {
+        [self registerFormat:constraintsFormat];
+    }
 }
 
 - (void)registerConstraint:(NSLayoutConstraint *)constraint {
     [self.registeredConstraintsMutable addObject:constraint];
 }
 
-- (void)registerConstraintWithFormat:(NSString *)format formatOptions:(NSLayoutFormatOptions)formatOptions {
-    NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:format options:formatOptions metrics:self.layoutMetrics views:self.subviewsForAutoLayout];
+- (void)registerFormat:(NSString *)constraintsFormat formatOptions:(NSLayoutFormatOptions)formatOptions {
+    NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:constraintsFormat
+                                                                   options:formatOptions
+                                                                   metrics:self.layoutMetrics
+                                                                     views:self.subviewsForAutoLayout];
     [self.registeredConstraintsMutable addObjectsFromArray:constraints];
 }
 
@@ -136,4 +145,5 @@ NSString *const AZConstraintRegisterSpacingKey = @"spacing";
     [self registerMetric:@(contentInsets.bottom) forKey:AZConstraintRegisterBottomKey];
     [self registerMetric:@(contentInsets.right) forKey:AZConstraintRegisterRightKey];
 }
+
 @end

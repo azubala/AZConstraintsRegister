@@ -51,8 +51,8 @@ SpecBegin(AZConstraintsRegister)
                 [constraintsRegister registerContainerView:testView];
                 [constraintsRegister registerSubview:testSubview forLayoutKey:@"subview"];
                 [constraintsRegister beginUpdates];
-                [constraintsRegister registerConstraintWithFormat:@"|-left-[subview]-right-|"];
-                [constraintsRegister registerConstraintWithFormat:@"V:|-top-[subview]-bottom-|"];
+                [constraintsRegister registerFormat:@"|-left-[subview]-right-|"];
+                [constraintsRegister registerFormat:@"V:|-top-[subview]-bottom-|"];
                 [constraintsRegister registerMetric:@(123) forKey:@"Test"];
                 [constraintsRegister endUpdates];
                 registeredConstraints = constraintsRegister.registeredConstraints;
@@ -178,18 +178,17 @@ SpecBegin(AZConstraintsRegister)
             });
         });
 
-        describe(@"register constraints with format", ^{
+        describe(@"register constraints", ^{
 
             __block UIView *testView;
             __block UIView *testSubview;
             __block NSString *subviewKey;
-            __block NSString *format;
             __block NSLayoutFormatOptions formatOptions;
+
 
             beforeEach(^{
                 formatOptions = 0;
                 subviewKey = @"subview";
-                format = @"|-left-[subview]-right-|";
                 testView = [UIView new];
                 testSubview = [UIView new];
                 [testView addSubview:testSubview];
@@ -198,10 +197,59 @@ SpecBegin(AZConstraintsRegister)
                 constraintsRegister.contentInsets = UIEdgeInsetsMake(10, 10, 10, 10);
             });
 
+            context(@"with format", ^{
+                __block NSString *format;
 
-            sharedExamplesFor(@"register update", ^(NSDictionary *sharedContext) {
-                it(@"should add constraints to register", ^{
-                    NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:format options:formatOptions metrics:constraintsRegister.layoutMetrics views:constraintsRegister.subviewsForAutoLayout];
+                sharedExamplesFor(@"register update", ^(NSDictionary *sharedContext) {
+                    it(@"should add constraints to register", ^{
+                        NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:format
+                                                                                       options:formatOptions
+                                                                                       metrics:constraintsRegister.layoutMetrics
+                                                                                         views:constraintsRegister.subviewsForAutoLayout];
+                        NSEnumerator *enumerator = [constraintsRegister.registeredConstraints objectEnumerator];
+                        for (NSLayoutConstraint *constraint in constraints) {
+                            NSLayoutConstraint *registeredConstraint = [enumerator nextObject];
+                            expect([constraint az_isEqualToConstraint:registeredConstraint]).to.beTruthy();
+                        }
+                    });
+                });
+
+                beforeEach(^{
+                    format = @"|-left-[subview]-right-|";
+                });
+
+                context(@"and without layout format", ^{
+                    beforeEach(^{
+                        [constraintsRegister registerFormat:format];
+                    });
+                    itShouldBehaveLike(@"register update", @{});
+                });
+                context(@"and layout format", ^{
+                    beforeEach(^{
+                        formatOptions = NSLayoutFormatAlignAllCenterY;
+                        [constraintsRegister registerFormat:format formatOptions:formatOptions]; //action
+                    });
+                    itShouldBehaveLike(@"register update", @{});
+                });
+            });
+
+            context(@"from array", ^{
+                __block NSArray *formats;
+                beforeEach(^{
+                    formats = @[
+                        @"|-left-[subview]-right-|",
+                        @"V:|-top-[subview]-bottom-|"
+                    ];
+                    [constraintsRegister registerFormats:formats];
+                });
+                it(@"should add all constraints from formats", ^{
+                    NSMutableArray *constraints = [NSMutableArray new];
+                    for (NSString *format in formats) {
+                        [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:format
+                                                                                                 options:formatOptions
+                                                                                                 metrics:constraintsRegister.layoutMetrics
+                                                                                                   views:constraintsRegister.subviewsForAutoLayout]];
+                    }
                     NSEnumerator *enumerator = [constraintsRegister.registeredConstraints objectEnumerator];
                     for (NSLayoutConstraint *constraint in constraints) {
                         NSLayoutConstraint *registeredConstraint = [enumerator nextObject];
@@ -210,20 +258,6 @@ SpecBegin(AZConstraintsRegister)
                 });
             });
 
-            context(@"and without layout format", ^{
-                beforeEach(^{
-                    [constraintsRegister registerConstraintWithFormat:format];
-                });
-                itShouldBehaveLike(@"register update", @{});
-            });
-
-            context(@"and layout format", ^{
-                beforeEach(^{
-                    formatOptions = NSLayoutFormatAlignAllCenterY;
-                    [constraintsRegister registerConstraintWithFormat:format formatOptions:formatOptions]; //action
-                });
-                itShouldBehaveLike(@"register update", @{});
-            });
         });
 
         describe(@"begin updates", ^{
@@ -240,7 +274,7 @@ SpecBegin(AZConstraintsRegister)
                 [constraintsRegister registerSubview:subview forLayoutKey:subviewKey];
 
                 [constraintsRegister beginUpdates];
-                [constraintsRegister registerConstraintWithFormat:@"V:|-top-[subview]-bottom-|"];
+                [constraintsRegister registerFormat:@"V:|-top-[subview]-bottom-|"];
                 [constraintsRegister endUpdates];
 
 
@@ -270,7 +304,7 @@ SpecBegin(AZConstraintsRegister)
                 [constraintsRegister registerContainerView:testView];
                 constraintsRegister.contentInsets = UIEdgeInsetsMake(10, 10, 10, 10);
                 [constraintsRegister registerSubview:subview forLayoutKey:subviewKey];
-                [constraintsRegister registerConstraintWithFormat:@"V:|-top-[subview]-bottom-|"];
+                [constraintsRegister registerFormat:@"V:|-top-[subview]-bottom-|"];
 
                 [constraintsRegister endUpdates]; //action
             });
