@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "AZConstraintsRegister"
-  s.version          = "0.1.1"
+  s.version          = "0.1.2"
   s.summary          = "Lightweight tool to manage Auto Layout constraints using Visual Format Language"
   s.description      = <<-DESC
   Lightweight tool to manage Auto Layout constraints using Visual Format Language.
