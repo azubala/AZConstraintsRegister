@@ -1,5 +1,8 @@
 # AZConstraintsRegister CHANGELOG
 
+## 0.1.4
+- fixes an issue when registering subiview or metrics with variable bindings, when plain variable with dot notation was provided to the `NSDictionaryOfVariableBindings` it was not registered;
+
 ## 0.1.3
 
 - Added new methods to bulk register of subviews, metrics and `NSLayoutConstraint` objects:

@@ -166,17 +166,26 @@ SpecBegin(AZConstraintsRegister)
         describe(@"reigstering views using variable bindings", ^{
             __block NSDictionary *bindings;
             __block TestView *testView;
+            __block UIView *externallyAddedSubview;
             beforeEach(^{
                 testView = [TestView new];
+                externallyAddedSubview = [UIView new];
+                [testView addSubview:externallyAddedSubview];
                 [constraintsRegister registerContainerView:testView];
-                bindings = NSDictionaryOfVariableBindings(testView.subview);
+                bindings = NSDictionaryOfVariableBindings(testView.subview, externallyAddedSubview);
                 [constraintsRegister registerSubviewsWithVariableBindings:bindings];
             });
             it(@"should register subview", ^{
                 expect([[constraintsRegister subviewsForAutoLayout] allValues]).to.contain(testView.subview);
             });
+            it(@"should register externally added subview", ^{
+                expect([[constraintsRegister subviewsForAutoLayout] allValues]).to.contain(externallyAddedSubview);
+            });
             it(@"should register subview under key without keypath", ^{
                 expect([[constraintsRegister subviewsForAutoLayout] allKeys]).to.contain(@"subview");
+            });
+            it(@"should register externally added subview under its name", ^{
+                expect([[constraintsRegister subviewsForAutoLayout] allKeys]).to.contain(@"externallyAddedSubview");
             });
         });
 
@@ -219,17 +228,25 @@ SpecBegin(AZConstraintsRegister)
         describe(@"reigstering metrics using variable bindings", ^{
             __block NSDictionary *bindings;
             __block TestView *testView;
+            __block NSNumber *externalMetric;
             beforeEach(^{
                 testView = [TestView new];
                 [constraintsRegister registerContainerView:testView];
-                bindings = NSDictionaryOfVariableBindings(testView.metric);
+                externalMetric = @(456);
+                bindings = NSDictionaryOfVariableBindings(testView.metric, externalMetric);
                 [constraintsRegister registerMetricsWithVariableBindings:bindings];
             });
             it(@"should register metric", ^{
                 expect([[constraintsRegister layoutMetrics] allValues]).to.contain(testView.metric);
             });
+            it(@"should register external metric", ^{
+                expect([[constraintsRegister layoutMetrics] allValues]).to.contain(externalMetric);
+            });
             it(@"should register metric under key without keypath", ^{
                 expect([[constraintsRegister layoutMetrics] allKeys]).to.contain(@"metric");
+            });
+            it(@"should register external metric under variable name", ^{
+                expect([[constraintsRegister layoutMetrics] allKeys]).to.contain(@"externalMetric");
             });
         });
 

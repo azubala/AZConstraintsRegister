@@ -108,7 +108,7 @@ NSString *const AZConstraintRegisterSpacingKey = @"spacing";
 
 - (void)registerSubviewsWithVariableBindings:(NSDictionary *)subviewBindings {
     for (NSString *subviewKey in [subviewBindings allKeys]) {
-        [self registerSubview:subviewBindings[subviewKey] forLayoutKey:[subviewKey pathExtension]];
+        [self registerSubview:subviewBindings[subviewKey] forLayoutKey:[self sanitizedKeyFromKey:subviewKey]];
     }
 }
 
@@ -126,7 +126,7 @@ NSString *const AZConstraintRegisterSpacingKey = @"spacing";
 
 - (void)registerMetricsWithVariableBindings:(NSDictionary *)metricsBindings {
     for (NSString *metricKey in [metricsBindings allKeys]) {
-        [self registerMetric:metricsBindings[metricKey] forKey:[metricKey pathExtension]];
+        [self registerMetric:metricsBindings[metricKey] forKey:[self sanitizedKeyFromKey:metricKey]];
     }
 }
 
@@ -173,4 +173,10 @@ NSString *const AZConstraintRegisterSpacingKey = @"spacing";
     [self registerMetric:@(contentInsets.bottom) forKey:AZConstraintRegisterBottomKey];
     [self registerMetric:@(contentInsets.right) forKey:AZConstraintRegisterRightKey];
 }
+
+- (NSString *)sanitizedKeyFromKey:(NSString *)key {
+    NSString *pathExtension = [key pathExtension];
+    return [pathExtension length] ? pathExtension : key;
+}
+
 @end
