@@ -1,6 +1,7 @@
 #import "Specta.h"
 #import "AZConstraintsRegister.h"
 #import "NSLayoutConstraint+AZComparing.h"
+#import "TestView.h"
 
 SpecBegin(AZConstraintsRegister)
 
@@ -104,7 +105,6 @@ SpecBegin(AZConstraintsRegister)
                 it(@"should add a view to subview for auto layout dictionary ", ^{
                     expect([[constraintsRegister subviewsForAutoLayout] allValues]).to.contain(testSubview);
                 });
-
                 it(@"should disable translate autoresizing masks to constraints", ^{
                     expect(testSubview.translatesAutoresizingMaskIntoConstraints).to.beFalsy();
                 });
@@ -122,6 +122,64 @@ SpecBegin(AZConstraintsRegister)
             });
         });
 
+        describe(@"registering multiple views at once", ^{
+            __block UIView *subview1, *subview2, *testView;
+            __block UIView *viewNotInHierarchy;
+            __block NSString *subviewKey1, *subviewKey2;
+            __block NSString *notInHierarchyKey;
+            beforeEach(^{
+                testView = [UIView new];
+                [constraintsRegister registerContainerView:testView];
+                subview1 = [UIView new]; [testView addSubview:subview1];
+                subview2 = [UIView new]; [testView addSubview:subview2];
+                viewNotInHierarchy = [UIView new];
+                subviewKey1 = @"view1";
+                subviewKey2 = @"view2";
+                notInHierarchyKey = @"notInHierarchy";
+
+                [constraintsRegister registerSubviews:@{
+                    subviewKey1 : subview1,
+                    subviewKey2 : subview2,
+                    notInHierarchyKey : viewNotInHierarchy
+                }];
+            });
+            it(@"should add all keys of subviews to auto layout dictionary", ^{
+                expect(constraintsRegister.subviewsForAutoLayout.allKeys).to.contain(subviewKey1);
+                expect(constraintsRegister.subviewsForAutoLayout.allKeys).to.contain(subviewKey2);
+            });
+            it(@"should add all subviews to auto layout dictionary", ^{
+                expect(constraintsRegister.subviewsForAutoLayout.allValues).to.contain(subview1);
+                expect(constraintsRegister.subviewsForAutoLayout.allValues).to.contain(subview2);
+            });
+            it(@"should disable translate autoresizing masks to constraints", ^{
+                expect(subview1.translatesAutoresizingMaskIntoConstraints).to.beFalsy();
+                expect(subview2.translatesAutoresizingMaskIntoConstraints).to.beFalsy();
+            });
+            it(@"should NOT add a new key to subview for auto layout dictionary", ^{
+                expect([[constraintsRegister subviewsForAutoLayout] allKeys]).notTo.contain(notInHierarchyKey);
+            });
+            it(@"should NOT add a view to subview for auto layout dictionary ", ^{
+                expect([[constraintsRegister subviewsForAutoLayout] allValues]).notTo.contain(viewNotInHierarchy);
+            });
+        });
+
+        describe(@"reigstering views using variable bindings", ^{
+            __block NSDictionary *bindings;
+            __block TestView *testView;
+            beforeEach(^{
+                testView = [TestView new];
+                [constraintsRegister registerContainerView:testView];
+                bindings = NSDictionaryOfVariableBindings(testView.subview);
+                [constraintsRegister registerSubviewsWithVariableBindings:bindings];
+            });
+            it(@"should register subview", ^{
+                expect([[constraintsRegister subviewsForAutoLayout] allValues]).to.contain(testView.subview);
+            });
+            it(@"should register subview under key without keypath", ^{
+                expect([[constraintsRegister subviewsForAutoLayout] allKeys]).to.contain(@"subview");
+            });
+        });
+
         describe(@"registering metric", ^{
 
             __block NSString *metricKey;
@@ -136,6 +194,42 @@ SpecBegin(AZConstraintsRegister)
 
             it(@"should update metrics dictionary", ^{
                 expect(constraintsRegister.layoutMetrics[metricKey]).to.equal(metricValue);
+            });
+        });
+
+        describe(@"registering multiple metrics at once", ^{
+            __block NSNumber *metric1, *metric2;
+            __block NSString *metricKey1, *metricKey2;
+            beforeEach(^{
+                metric1 = @123.0f;
+                metric2 = @456.0f;
+                metricKey1 = @"metric1";
+                metricKey2 = @"metric2";
+                [constraintsRegister registerMetrics:@{
+                    metricKey1 : metric1,
+                    metricKey2 : metric2
+                }];
+            });
+            it(@"should add all metrics dictionary", ^{
+                expect(constraintsRegister.layoutMetrics[metricKey1]).to.equal(metric1);
+                expect(constraintsRegister.layoutMetrics[metricKey2]).to.equal(metric2);
+            });
+        });
+
+        describe(@"reigstering metrics using variable bindings", ^{
+            __block NSDictionary *bindings;
+            __block TestView *testView;
+            beforeEach(^{
+                testView = [TestView new];
+                [constraintsRegister registerContainerView:testView];
+                bindings = NSDictionaryOfVariableBindings(testView.metric);
+                [constraintsRegister registerMetricsWithVariableBindings:bindings];
+            });
+            it(@"should register metric", ^{
+                expect([[constraintsRegister layoutMetrics] allValues]).to.contain(testView.metric);
+            });
+            it(@"should register metric under key without keypath", ^{
+                expect([[constraintsRegister layoutMetrics] allKeys]).to.contain(@"metric");
             });
         });
 
@@ -175,6 +269,19 @@ SpecBegin(AZConstraintsRegister)
             });
             it(@"should add constraint ", ^{
                 expect(constraintsRegister.registeredConstraints).to.contain(constraint);
+            });
+        });
+
+        describe(@"register multiple constraints at once", ^{
+            __block NSLayoutConstraint *constraint1, *constraint2;
+            beforeEach(^{
+                constraint1 = [[NSLayoutConstraint alloc] init];
+                constraint2 = [[NSLayoutConstraint alloc] init];
+                [constraintsRegister registerConstraints:@[constraint1, constraint2]];
+            });
+            it(@"should add all constraints", ^{
+                expect(constraintsRegister.registeredConstraints).to.contain(constraint1);
+                expect(constraintsRegister.registeredConstraints).to.contain(constraint2);
             });
         });
 

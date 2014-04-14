@@ -1,5 +1,20 @@
 # AZConstraintsRegister CHANGELOG
 
+## 0.1.3
+
+- Added new methods to bulk register of subviews, metrics and `NSLayoutConstraint` objects:
+```objective-c
+- (void)registerSubviews:(NSDictionary *)subviewsMapping;
+- (void)registerMetrics:(NSDictionary *)metricsMapping;
+- (void)registerConstraints:(NSArray *)constraints;
+```
+
+- Added two methods to register subviews and metrics using `NSDictionaryOfVariableBindings` macro:
+```objective-c
+- (void)registerSubviewsWithVariableBindings:(NSDictionary *)variableBindings;
+- (void)registerMetricsWithVariableBindings:(NSDictionary *)metricsBindings;
+```
+
 ## 0.1.2
 
 - Added new method for bulk register constraints: `registerFormats:`;

@@ -32,6 +32,13 @@
 
 - (void)registerConstraint:(NSLayoutConstraint *)constraint;
 
+- (void)registerSubviews:(NSDictionary *)subviewsMapping;
+- (void)registerMetrics:(NSDictionary *)metricsMapping;
+- (void)registerConstraints:(NSArray *)constraints;
+
+- (void)registerSubviewsWithVariableBindings:(NSDictionary *)variableBindings;
+- (void)registerMetricsWithVariableBindings:(NSDictionary *)metricsBindings;
+
 @end
 
 // Layout predefined keys, which can be used in VFL in constraints

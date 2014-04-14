@@ -100,9 +100,33 @@ NSString *const AZConstraintRegisterSpacingKey = @"spacing";
     }
 }
 
+- (void)registerSubviews:(NSDictionary *)subviewsMapping {
+    for (NSString *subviewKey in [subviewsMapping allKeys]) {
+        [self registerSubview:subviewsMapping[subviewKey] forLayoutKey:subviewKey];
+    }
+}
+
+- (void)registerSubviewsWithVariableBindings:(NSDictionary *)subviewBindings {
+    for (NSString *subviewKey in [subviewBindings allKeys]) {
+        [self registerSubview:subviewBindings[subviewKey] forLayoutKey:[subviewKey pathExtension]];
+    }
+}
+
 - (void)registerMetric:(NSNumber *)metricValue forKey:(NSString *)metricKey {
     if (metricKey && metricValue) {
         self.layoutMetricsMutable[metricKey] = metricValue;
+    }
+}
+
+- (void)registerMetrics:(NSDictionary *)metricsMapping {
+    for (NSString *metricKey in [metricsMapping allKeys]) {
+        [self registerMetric:metricsMapping[metricKey] forKey:metricKey];
+    }
+}
+
+- (void)registerMetricsWithVariableBindings:(NSDictionary *)metricsBindings {
+    for (NSString *metricKey in [metricsBindings allKeys]) {
+        [self registerMetric:metricsBindings[metricKey] forKey:[metricKey pathExtension]];
     }
 }
 
@@ -129,6 +153,10 @@ NSString *const AZConstraintRegisterSpacingKey = @"spacing";
     [self.registeredConstraintsMutable addObject:constraint];
 }
 
+- (void)registerConstraints:(NSArray *)constraints {
+    [self.registeredConstraintsMutable addObjectsFromArray:constraints];
+}
+
 - (void)registerFormat:(NSString *)constraintsFormat formatOptions:(NSLayoutFormatOptions)formatOptions {
     NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:constraintsFormat
                                                                    options:formatOptions
@@ -145,5 +173,4 @@ NSString *const AZConstraintRegisterSpacingKey = @"spacing";
     [self registerMetric:@(contentInsets.bottom) forKey:AZConstraintRegisterBottomKey];
     [self registerMetric:@(contentInsets.right) forKey:AZConstraintRegisterRightKey];
 }
-
 @end

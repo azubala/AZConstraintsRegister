@@ -29,6 +29,7 @@ In order to use the register, you need to do two things. First you need to regis
 	return self;
 }
 ```
+You also use the variable bindings macro for registering metrics and subview, check section [NSDictionaryOfVariableBindings](#nsdictionaryofvariablebindings) to see how the register handles those bindings.
 
 Now you can enjoy the register simplicity, just add VFL constraints to the view between calls of `beginUpdates` and `endUpdates`:
 
@@ -91,6 +92,12 @@ That's pretty cool but makes code long and not nice to read. The `AZConstraintsR
 ```objective-c
 [self.constraintsRegister registerMetric:@(20.0f) forKey:@"mySpacing"];
 ```
+or
+```objective-c
+[self.constraintsRegister registerMetrics:@{
+    @"mySpacing" : @(20.0f)
+}];
+```
 
 And then you can refer to `mySpacing` in your VFL.
 
@@ -114,6 +121,26 @@ For example:
 ```objective-c
 [self.constraintsRegister registerConstraintWithFormat:@"|-(left)-[subview]-(right)-|"];
 [self.constraintsRegister registerConstraintWithFormat:@"V:|-(top)-[subview]-(bottom)-|"];
+```
+
+### NSDictionaryOfVariableBindings
+
+Together with the Auto Layout, Apple has introduced the helper macro `NSDictionaryOfVariableBindings` which creates quickly a dictionary with provided variables. Works fine, but breaks VFL when you register properties like so:
+```objective-c
+NSDictionary *bindings = NSDictionaryOfVariableBindings(self.subview)
+```
+The key in for the subview will be `self.subview` and if you reference it in VFL it will fail with an exception. To make use of this cool macro and be able to use it with properties `AZConstraintsRegister` comes those two helper methods:
+```objective-c
+- (void)registerSubviewsWithVariableBindings:(NSDictionary *)variableBindings;
+- (void)registerMetricsWithVariableBindings:(NSDictionary *)metricsBindings;
+```
+
+Which basically strips out key path from keys in the binding dictionary, which reduces code and let you do the following:
+
+```objective-c
+NSDictionary *bindings = NSDictionaryOfVariableBindings(self.subview);
+[self.constraintsRegister registerSubviewsWithVariableBindings:bindings];
+[self.constraintsRegister registerFormat:@"|-[subview]-|"]
 ```
 
 ### Demo project
