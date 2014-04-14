@@ -29,7 +29,7 @@ In order to use the register, you need to do two things. First you need to regis
 	return self;
 }
 ```
-You also use the variable bindings macro for registering metrics and subview, check the section [NSDictionaryOfVariableBindings](#nsdictionaryofvariablebindings) to see how the register handles those bindings.
+You can also use the variable bindings macro for registering metrics and subview, check the section [NSDictionaryOfVariableBindings](#nsdictionaryofvariablebindings) to see how the register handles those bindings.
 
 Now you can enjoy the register simplicity, just add VFL constraints to the view between calls of `beginUpdates` and `endUpdates`:
 
