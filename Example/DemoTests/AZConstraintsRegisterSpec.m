@@ -109,6 +109,22 @@ SpecBegin(AZConstraintsRegister)
                     expect(testSubview.translatesAutoresizingMaskIntoConstraints).to.beFalsy();
                 });
             });
+            context(@"with a flag set to NOT disable autoresizing mask translation", ^{
+                beforeEach(^{
+                    testSubview.translatesAutoresizingMaskIntoConstraints = YES;
+                    [testView addSubview:testSubview];
+                    [constraintsRegister registerSubview:testSubview forLayoutKey:subviewLayoutKey disableAutoresizingMaskTranslation:NO]; //action
+                });
+                it(@"should add a new key to subview for auto layout dictionary", ^{
+                    expect([[constraintsRegister subviewsForAutoLayout] allKeys]).to.contain(subviewLayoutKey);
+                });
+                it(@"should add a view to subview for auto layout dictionary ", ^{
+                    expect([[constraintsRegister subviewsForAutoLayout] allValues]).to.contain(testSubview);
+                });
+                it(@"should disable translate autoresizing masks to constraints", ^{
+                    expect(testSubview.translatesAutoresizingMaskIntoConstraints).to.beTruthy();
+                });
+            });
             context(@"which is not a subview of container view", ^{
                 beforeEach(^{
                     [constraintsRegister registerSubview:testSubview forLayoutKey:subviewLayoutKey]; //action
@@ -382,6 +398,35 @@ SpecBegin(AZConstraintsRegister)
                 });
             });
 
+
+            context(@"from array with format options", ^{
+                __block NSArray *formats;
+                beforeEach(^{
+                    formats = @[
+                        @"|-left-[subview]-right-|",
+                        @"V:|-top-[subview]-bottom-|"
+                    ];
+
+                    formatOptions = NSLayoutFormatAlignAllCenterY;
+                    [constraintsRegister registerFormats:formats formatOptions:formatOptions];
+                });
+
+                it(@"should add all constraints from formats", ^{
+                    NSMutableArray *constraints = [NSMutableArray new];
+                    for (NSString *format in formats) {
+                        [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:format
+                                                                                                 options:NSLayoutFormatAlignAllCenterY
+                                                                                                 metrics:constraintsRegister.layoutMetrics
+                                                                                                   views:constraintsRegister.subviewsForAutoLayout]];
+                    }
+                    NSEnumerator *enumerator = [constraintsRegister.registeredConstraints objectEnumerator];
+                    for (NSLayoutConstraint *constraint in constraints) {
+                        NSLayoutConstraint *registeredConstraint = [enumerator nextObject];
+                        expect([constraint az_isEqualToConstraint:registeredConstraint]).to.beTruthy();
+                    }
+                });
+
+            });
         });
 
         describe(@"begin updates", ^{

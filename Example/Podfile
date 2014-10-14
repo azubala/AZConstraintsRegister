@@ -1,5 +1,8 @@
+
+source 'https://github.com/CocoaPods/Specs.git'
+
 target "Demo" do
-	pod "AZConstraintsRegister", :path => "../AZConstraintsRegister.podspec"
+	pod "AZConstraintsRegister", :path => "../"
 end
 
 target "DemoTests" do

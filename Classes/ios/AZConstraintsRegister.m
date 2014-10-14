@@ -92,12 +92,17 @@ NSString *const AZConstraintRegisterSpacingKey = @"spacing";
     self.containerView = nil;
 }
 
-
-- (void)registerSubview:(UIView *)view forLayoutKey:(NSString *)layoutKey {
+- (void)registerSubview:(UIView *)view forLayoutKey:(NSString *)layoutKey disableAutoresizingMaskTranslation:(BOOL)disableTranslation {
     if ([view isDescendantOfView:self.containerView] && layoutKey) {
-        view.translatesAutoresizingMaskIntoConstraints = NO;
+        if (disableTranslation) {
+            view.translatesAutoresizingMaskIntoConstraints = NO;
+        }
         self.subviewsForAutoLayoutMutable[layoutKey] = view;
     }
+}
+
+- (void)registerSubview:(UIView *)view forLayoutKey:(NSString *)layoutKey {
+    [self registerSubview:view forLayoutKey:layoutKey disableAutoresizingMaskTranslation:YES];
 }
 
 - (void)registerSubviews:(NSDictionary *)subviewsMapping {
@@ -144,9 +149,7 @@ NSString *const AZConstraintRegisterSpacingKey = @"spacing";
 }
 
 - (void)registerFormats:(NSArray *)constraintsFormats {
-    for (NSString *constraintsFormat in constraintsFormats) {
-        [self registerFormat:constraintsFormat];
-    }
+    [self registerFormats:constraintsFormats formatOptions:0];
 }
 
 - (void)registerConstraint:(NSLayoutConstraint *)constraint {
@@ -164,6 +167,13 @@ NSString *const AZConstraintRegisterSpacingKey = @"spacing";
                                                                      views:self.subviewsForAutoLayout];
     [self.registeredConstraintsMutable addObjectsFromArray:constraints];
 }
+
+- (void)registerFormats:(NSArray *)constraintsFormats formatOptions:(NSLayoutFormatOptions)formatOptions {
+    for (NSString *constraintsFormat in constraintsFormats) {
+        [self registerFormat:constraintsFormat formatOptions:formatOptions];
+    }
+}
+
 
 #pragma mark - Private methods
 

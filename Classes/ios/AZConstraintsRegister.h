@@ -20,15 +20,18 @@
 - (void)registerContainerView:(UIView *)view;
 - (void)unregisterContainerView;
 
-- (void)registerSubview:(UIView *)view forLayoutKey:(NSString *)layoutKey;
+- (void)registerSubview:(UIView *)view forLayoutKey:(NSString *)layoutKey; //by default it disables translatesAutoresizingMaskIntoConstraints of the view
+- (void)registerSubview:(UIView *)view forLayoutKey:(NSString *)layoutKey disableAutoresizingMaskTranslation:(BOOL)disableTranslation;
 - (void)registerMetric:(NSNumber *)metricValue forKey:(NSString *)metricKey;
 
 - (void)beginUpdates;
 - (void)endUpdates;
 
 - (void)registerFormat:(NSString *)constraintsFormat;
-- (void)registerFormats:(NSArray *)constraintsFormats;
 - (void)registerFormat:(NSString *)constraintsFormat formatOptions:(NSLayoutFormatOptions)formatOptions;
+
+- (void)registerFormats:(NSArray *)constraintsFormats;
+- (void)registerFormats:(NSArray *)constraintsFormats formatOptions:(NSLayoutFormatOptions)formatOptions;
 
 - (void)registerConstraint:(NSLayoutConstraint *)constraint;
 
@@ -38,6 +41,7 @@
 
 - (void)registerSubviewsWithVariableBindings:(NSDictionary *)variableBindings;
 - (void)registerMetricsWithVariableBindings:(NSDictionary *)metricsBindings;
+
 
 @end
 
