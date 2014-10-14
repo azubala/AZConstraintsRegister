@@ -1,5 +1,17 @@
 # AZConstraintsRegister CHANGELOG
 
+## 0.1.5
+- added new method:
+ ```
+ - (void)registerFormats:(NSArray *)constraintsFormats formatOptions:(NSLayoutFormatOptions)formatOptions;
+ ```
+
+- added new method:
+ ```
+ - (void)registerSubview:(UIView *)view forLayoutKey:(NSString *)layoutKey disableAutoresizingMaskTranslation:(BOOL)disableTranslation;
+ ```
+
+
 ## 0.1.4
 - fixes an issue when registering subiview or metrics with variable bindings, when plain variable with dot notation was provided to the `NSDictionaryOfVariableBindings` it was not registered;
 
